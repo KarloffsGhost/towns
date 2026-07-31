@@ -99,10 +99,10 @@ jobs:
                     -t river:local-latest \
                     . 
 
-                  echo "::set-output name=tag_valid::false"
+                  echo "tag_valid=false" >> "$GITHUB_OUTPUT"
                   for tag in "${TAGS[@]}"; do
                     if [ "$tag" == "mainnet" ] || [ "$tag" == "testnet" ]; then
-                      echo "::set-output name=tag_valid::true"
+                      echo "tag_valid=true" >> "$GITHUB_OUTPUT"
                       echo "::set-output name=tag_value::$tag"
                     fi
                     docker tag river:local-latest $ECR_REGISTRY/$REGISTRY_ALIAS/$ECR_REPOSITORY:$tag
